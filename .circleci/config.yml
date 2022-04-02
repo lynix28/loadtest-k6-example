@@ -12,7 +12,7 @@ jobs:
           name: "Run Test"
           command: "k6 run tests/run_test.js --summary-export reports/report.json"
       - store_artifacts:
-          path: report.json
+          path: reports/
 
 workflows:
   Loadtest-Workflow:
