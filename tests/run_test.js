@@ -91,7 +91,7 @@ export function groupPOST() {
 
 		// validate-response
 		const checkResponse = check(response, {
-			[path.login]: response.status === 201 && parsedResponse.token === 'QpwL5tke4Pnpja7X4'
+			[path.login]: response.status === 200 && parsedResponse.token === 'QpwL5tke4Pnpja7X4'
 		});
 
 		if (!checkResponse) {
