@@ -1,0 +1,20 @@
+version: 2.1
+jobs:
+  Build-and-Test:
+    docker:
+      - image: grafana/k6
+    steps:
+      - checkout
+      - run: 
+          name: "Preparing Test"
+          command: "mkdir reports"
+      - run:
+          name: "Run Test"
+          command: "k6 run tests/run_test.js --summary-export reports/report.json"
+      - store_artifacts:
+          path: reports/
+
+workflows:
+  Loadtest-Workflow:
+    jobs:
+      - Build-and-Test
