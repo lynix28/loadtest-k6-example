@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import http from 'k6/http';
 import { check, group } from 'k6';
-import { httpNot200, iterationSuccess, iterationFailed, errorRate } from '../helpers/custom_metrics.js';
-import { getPayload, postPayload } from '../helpers/payload.js';
-import { baseURL, metricTags, path } from '../helpers/global_variable.js';
-import { request } from '../data/request.js';
+import { httpNot200, iterationSuccess, iterationFailed, errorRate } from './helpers/custom_metrics.js';
+import { getPayload, postPayload } from './helpers/payload.js';
+import { baseURL, metricTags, path } from './helpers/global_variable.js';
+import { request } from './data/request.js';
 
 /* Test Scenario Configuration */
 export const options = {
