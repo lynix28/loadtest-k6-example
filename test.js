@@ -30,6 +30,9 @@ export const options = {
 		}
 	},
 
+	// trend stats configuration
+	summaryTrendStats: ['avg', 'p(95)', 'p(99)', 'max'],
+
 	// acceptance criteria
 	thresholds: {
 		[`http_req_duration${JSON.stringify(metricTags.getUsers)}`]: ['max<10000'],
@@ -60,7 +63,7 @@ export function groupGET() {
 		});
 
 		if (!checkResponse) {
-			if (response.status != 200) {
+			if (response.status != 200``) {
 				httpNot200.add(1, metricTags.getUsers);
 				console.error((`${path.getUsers} | HTTP Response: ${response.status}`));
 			}
