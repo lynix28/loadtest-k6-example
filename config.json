@@ -21,8 +21,8 @@
 	},
 	"summaryTrendStats": ["avg", "p(95)", "p(99)", "max"],
 	"thresholds": {
-		"http_req_duration{ api: path.getUsers }": ["max<10000"],
-		"http_req_duration{ api: path.login }": ["max<10000"],
+		"http_req_duration{ api: /api/users?page=2 }": ["max<10000"],
+		"http_req_duration{ api: /api/login }": ["max<10000"],
 		"iterations_error_rate": [{ 
 			"threshold": "rate<0.1",
 			"abortOnFail": true
