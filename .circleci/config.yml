@@ -10,9 +10,12 @@ jobs:
           command: mkdir reports
       - run:
           name: "Run Test"
-          command: k6 run test.js --log-output file=reports/k6.log --log-format json --summary-export reports/report.json -q
+          command: k6 run ./test.js -c ./config.json --log-output file=reports/k6.log --log-format json --summary-export reports/report.json -q
+      - run:
+          name: "Wrapping Test Result"
+          command: tar -cvf artifact.tar reports/
       - store_artifacts:
-          path: reports/
+          path: artifact.tar
 
 workflows:
   Loadtest-Workflow:

@@ -1,0 +1,31 @@
+{
+	"scenarios": {
+		"testScenarioGet": {
+			"executor": "constant-arrival-rate",
+			"rate": 10,
+			"timeUnit": "1s",
+			"duration": "10s",
+			"preAllocatedVUs": 1,
+			"maxVUs": 10,
+			"exec": "groupGET"
+		},
+		"testScenarioPost": {
+			"executor": "constant-arrival-rate",
+			"rate": 5,
+			"timeUnit": "1s",
+			"duration": "10s",
+			"preAllocatedVUs": 2,
+			"maxVUs": 5,
+			"exec": "groupPOST"
+		}
+	},
+	"summaryTrendStats": ["avg", "p(95)", "p(99)", "max"],
+    "thresholds": {
+        "http_req_duration{ api: path.getUsers }": ["max<10000"],
+        "http_req_duration{ api: path.login }": ["max<10000"],
+        "iterations_error_rate": [{ 
+            "threshold": "rate<0.1",
+            "abortOnFail": true
+        }]
+    }
+}

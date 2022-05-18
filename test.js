@@ -6,41 +6,6 @@ import { getPayload, postPayload } from './helpers/payload.js';
 import { baseURL, metricTags, path } from './helpers/global_variable.js';
 import { request } from './data/request.js';
 
-/* Test Scenario Configuration */
-export const options = {
-	// concurrent
-	scenarios: {
-		testScenarioGet: {
-			executor: 'constant-arrival-rate',
-			rate: 10,
-			timeUnit: '1s',
-			duration: '10s',
-			preAllocatedVUs: 1,
-			maxVUs: 10,
-			exec: 'groupGET'
-		},
-		testScenarioPost: {
-			executor: 'constant-arrival-rate',
-			rate: 5,
-			timeUnit: '1s',
-			duration: '10s',
-			preAllocatedVUs: 2,
-			maxVUs: 5,
-			exec: 'groupPOST'
-		}
-	},
-
-	// trend stats configuration
-	summaryTrendStats: ['avg', 'p(95)', 'p(99)', 'max'],
-
-	// acceptance criteria
-	thresholds: {
-		[`http_req_duration${JSON.stringify(metricTags.getUsers)}`]: ['max<10000'],
-		[`http_req_duration${JSON.stringify(metricTags.login)}`]: ['max<10000'],
-		'iterations_error_rate': [ { threshold: 'rate<0.1', abortOnFail: true } ]
-	}
-};
-
 /* Test Scenario */
 export function groupGET() {
 	group('Load Test - Method GET Request', function () {
