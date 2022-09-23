@@ -2,15 +2,26 @@ version: 2.1
 jobs:
   Build-and-Test:
     docker:
-      - image: grafana/k6
+      - image: pridecontrol/k6:v1
+        auth:
+          username: $USERNAME
+          password: $PASSWORD
     steps:
       - checkout
       - run: 
           name: "Preparing Test"
-          command: mkdir reports
+          command: |
+            mv ./data /app/
+            mv ./helpers /app/
+            mv ./config.json /app/
+            mv ./run.sh /app/
+            mv ./test.js /app/
       - run:
           name: "Run Test"
-          command: k6 run ./test.js -c ./config.json --log-output file=reports/k6.log --log-format json --summary-export reports/report.json -q
+          command: |
+            cd /app/
+            chmod +x run.sh
+            ./run.sh test.js $DISCORD_TOKEN $DISCORD_WEBHOOKID
       - run:
           name: "Wrapping Test Result"
           command: tar -cvf artifact.tar reports/
