@@ -3,19 +3,19 @@
 testcase=$1
 discord_token=$2
 discord_webhookid=$3
-date=$(TZ=Asia/Jakarta date "+%Y%m%d_%H%M%S")
+date=$(date "+%Y%m%d_%H%M%S")
 run_counter=0
 
 function send_notif () {
     if [ $run_counter != 1 ]
     then
-        start_time=$(TZ=Asia/Jakarta date "+%d %h %Y, %H:%M:%S")
+        start_time=$(date "+%d %h %Y, %H:%M:%S")
         title="Testing Start"
         message="Running $testcase on $start_time"
         cd /app/go/bin
         ./shoutrrr send --url "discord://$discord_token@$discord_webhookid" --title "$title" --message "$message"
     else
-        end_time=$(TZ=Asia/Jakarta date "+%d %h %Y, %H:%M:%S")
+        end_time=$(date "+%d %h %Y, %H:%M:%S")
         title="Testing Completed"
         message="Test run ($testcase) is completed on $end_time"
         cd /app/go/bin
