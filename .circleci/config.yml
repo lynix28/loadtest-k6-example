@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   Build-and-Test:
     docker:
-      - image: pridecontrol/k6:v1.1
+      - image: pridecontrol/k6:1.2.0
         auth:
           username: $USERNAME
           password: $PASSWORD

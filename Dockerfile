@@ -23,3 +23,7 @@ ENV PATH=/app:/usr/local:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/s
 ENV GOPATH=/app/go
 
 RUN go install github.com/containrrr/shoutrrr/shoutrrr@latest
+
+RUN apt-get -y remove --purge wget && \
+    apt-get -y autoclean && \
+    apt-get -y autoremove
