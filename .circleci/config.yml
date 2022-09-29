@@ -23,7 +23,7 @@ jobs:
           command: |
             cd /app/
             chmod +x run.sh
-            ./run.sh test.js $DISCORD_TOKEN $DISCORD_WEBHOOKID
+            ./run.sh pipeline test.js discord $DISCORD_TOKEN $DISCORD_WEBHOOKID
       - run:
           name: "Wrapping Test Result"
           command: tar -cvf artifact.tar /app/reports/
