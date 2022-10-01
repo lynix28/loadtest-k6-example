@@ -2,6 +2,11 @@ FROM ubuntu:22.04
 
 WORKDIR /app
 
+RUN echo 'net.ipv4.ip_local_port_range="1024 65535"' >> /etc/sysctl.conf && \
+    echo "net.ipv4.tcp_tw_reuse=1" >> /etc/sysctl.conf && \
+    echo "net.ipv4.tcp_timestamps=1" >> /etc/sysctl.conf && \
+    echo "ulimit -n 1048576" >> ~/.bashrc
+
 RUN mkdir /app/reports
 
 RUN apt-get update && \
