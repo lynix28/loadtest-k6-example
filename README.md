@@ -6,3 +6,6 @@ API Load testing example using K6 by Grafana Labs
 How to run in local:
  - Create `reports` directory/folder
  - `k6 run ./test.js -c ./config.json --log-output file=reports/k6.log --log-format json --summary-export reports/report.json`
+
+ More script example:
+ - Check on `script-example` directory

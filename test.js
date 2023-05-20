@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import http from 'k6/http';
 import { check, group } from 'k6';
-import { httpNot200, iterationSuccess, iterationFailed, errorRate } from './helpers/custom_metrics.js';
-import { getPayload, postPayload } from './helpers/payload.js';
+import * as customMetrics from './helpers/custom_metrics.js';
+import * as payload from './helpers/payload.js';
 import { baseURL, metricTags, path } from './helpers/global_variable.js';
 import { request } from './data/request.js';
 
@@ -10,7 +10,7 @@ import { request } from './data/request.js';
 export function groupGET() {
 	group('Load Test - Method GET Request', function () {
 		// http-request(1)
-		const data = getPayload(metricTags.getUsers);
+		const data = payload.getPayload(metricTags.getUsers);
 		const response = http.get(`${baseURL}${path.getUsers}`, data.params);
 		let parsedResponse;
 
@@ -29,15 +29,15 @@ export function groupGET() {
 
 		if (!checkResponse) {
 			if (response.status != 200) {
-				httpNot200.add(1, metricTags.getUsers);
+				customMetrics.httpNot200.add(1, metricTags.getUsers);
 				console.error((`${path.getUsers} | HTTP Response: ${response.status}`));
 			}
-			iterationFailed.add(1);
-			errorRate.add(true);
+			customMetrics.iterationFailed.add(1);
+			customMetrics.errorRate.add(true);
 			console.error(`${path.getUsers} | ${JSON.stringify(parsedResponse)}`);
 		} else {
-			iterationSuccess.add(1);
-			errorRate.add(false);
+			customMetrics.iterationSuccess.add(1);
+			customMetrics.errorRate.add(false);
 		}
 	});
 }
@@ -45,7 +45,7 @@ export function groupGET() {
 export function groupPOST() {
 	group('Load Test - Method POST Request', function () {
 		// http-request(1)
-		const data = postPayload(request.email, request.password, metricTags.login);
+		const data = payload.postPayload(request.email, request.password, metricTags.login);
 		const response = http.post(`${baseURL}${path.login}`, data.body, data.params);
 		let parsedResponse;
 
@@ -64,15 +64,15 @@ export function groupPOST() {
 
 		if (!checkResponse) {
 			if (response.status != 200) {
-				httpNot200.add(1, metricTags.login);
+				customMetrics.httpNot200.add(1, metricTags.login);
 				console.error((`${path.login} | HTTP Response: ${response.status}`));
 			}
-			iterationFailed.add(1);
-			errorRate.add(true);
+			customMetrics.iterationFailed.add(1);
+			customMetrics.errorRate.add(true);
 			console.error(`${path.login} | ${JSON.stringify(parsedResponse)}`);
 		} else {
-			iterationSuccess.add(1);
-			errorRate.add(false);
+			customMetrics.iterationSuccess.add(1);
+			customMetrics.errorRate.add(false);
 		}
 	});
 }
