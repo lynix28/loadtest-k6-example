@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "grpc-dummy-service": "file:script-example/support-files/for-grpc"
+  }
+}

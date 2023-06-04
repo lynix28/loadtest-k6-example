@@ -3,3 +3,5 @@ logs
 *log*
 report/
 reports/
+node_modules/
+package-lock.json

@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+message Data {
+    string id = 1;
+    string firstName = 2;
+    string lastName = 3;
+    string email = 4;
+}
+
+message NewData {
+    string firstName = 1;
+    string lastName = 2;
+    string email = 3;
+}
+
+service TestService {
+    rpc GetAllData (Empty) returns (DataList) {}
+    rpc GetData (UserId) returns (Data) {}
+    rpc DeleteData (UserId) returns (Empty) {}
+    rpc EditData (Data) returns (Data) {}
+    rpc AddData (NewData) returns (Data) {}
+}
+
+message UserId {
+    string id = 1;
+}
+
+message Empty {}
+
+message DataList {
+   repeated Data datas = 1;
+}

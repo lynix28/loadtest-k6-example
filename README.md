@@ -10,7 +10,9 @@ Create `reports` directory
 
 <h3><ins>More script example:</h3>
 
-- Check on `script-example` directory
+- Check on `script-example` directory \
+- To run it, use command `k6 run ./<testName>.js` \
+- for the GRPC test example, you need to build and run a Dummy GRPC Server, I provide the `Dockerfile` and the `Node Module` that you need.
 
 <h3><ins>How the report look like ?</h3>
  
